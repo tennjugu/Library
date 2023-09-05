@@ -42,7 +42,7 @@ function bookItem(){
 
     const bookAuthor = document.createElement("h5")
     bookAuthor.classList.add("book-author")
-    bookAuthor.textContent = `${book.author}`
+    bookAuthor.textContent = `by: ${book.author}`
     bookDetails.appendChild(bookAuthor)
 
     const bookPages = document.createElement("h6")
