@@ -1,6 +1,6 @@
 let myLibrary = []
 retrieveLocalStore()
-displayBook()
+bookItem()
 
 function Book(title, author, pages, read) {
     this.title = title
@@ -9,19 +9,24 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
-function toggle(position){
-  myLibrary[position].toggle()
-  displayBook()
+function toggle(position) {
+    myLibrary[position].read = !myLibrary[position].read; 
+    createLocalStore()
+    bookItem()
  }
 
 function removeBook(position){
     myLibrary.splice(position, 1)
-    displayBook()
+    createLocalStore()
+    bookItem()
 }
 
-function bookItem(book){
+function bookItem(){
     let eachBook = document.querySelector(".rightside")
     eachBook.innerHTML = ""
+
+    for (let i = 0; i < myLibrary.length; i++){
+        const book = myLibrary[i]
 
     const eachBookDiv = document.createElement("div")
     eachBookDiv.classList.add("eachBookDiv")
@@ -49,6 +54,7 @@ function bookItem(book){
     const readStatus = document.createElement("h6")
     readStatus.classList.add("read-status")
     readStatus.textContent = book.read ? "Read" : "Not Read"
+    bookDetails.appendChild(readStatus)
 
 
     const bookBtns = document.createElement("div")
@@ -59,7 +65,7 @@ function bookItem(book){
     removeButton.classList.add("remove-button")
     removeButton.textContent = "Remove Book"
     removeButton.addEventListener("click", function() {
-        removeBook(bookDetails)
+        removeBook(i)
     })
     bookBtns.appendChild(removeButton)
 
@@ -68,7 +74,7 @@ function bookItem(book){
     toggleButton.classList.add("toggle-button")
     toggleButton.textContent = "Toggle Status"
     toggleButton.addEventListener("click", function() {
-        toggle(bookDetails)
+        toggle(i)
     })
     bookBtns.appendChild(toggleButton)
 
@@ -77,16 +83,15 @@ function bookItem(book){
 
     eachBook.appendChild(eachBookDiv)
 }
-
-
-function displayBook(){
-    
-    for (let i = 0; i < myLibrary.length; i++){
-    const book = myLibrary[i]
-    bookItem(book)
-    
-    }
 }
+
+// function bookItem(){
+    
+    
+//     bookItem(book)
+    
+//     }
+// }
 
 function addBookToLibrary() {
     let title = document.querySelector("#title").value
@@ -97,7 +102,7 @@ function addBookToLibrary() {
     let newEntry = new Book(title, author, pages, read)
     myLibrary.push(newEntry)
     createLocalStore()
-    displayBook()
+    bookItem()
 }
 
 
