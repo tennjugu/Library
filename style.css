@@ -6,8 +6,6 @@
     gap: 70px;
     padding: 70px;
     padding-top: 30px;
-    /* width: 100vw;
-    height: 100vh; */
 }
 
 .library-section{
@@ -80,7 +78,6 @@ button:hover{
     height: 200px;
     width: 140px;
     border-radius: 8px;
-
 }
 
 .book-title{
